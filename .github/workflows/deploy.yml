@@ -22,7 +22,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      # 현재 시간 가져오기
+      # 현재시간가져오기
       - name: Get current time
         uses: josStorer/get-current-time@v2.0.2
         id: current-time
@@ -32,8 +32,7 @@ jobs:
 
       # 배포용 패키지 경로 저장
       - name: Set artifact
-        id: set-artifact
-        run: echo "ARTIFACT=$(ls ./build/libs/*.jar)" >> $GITHUB_ENV
+        run: echo "artifact=$(ls ./build/libs/*.jar)" >> $GITHUB_ENV
 
       # EC2 인스턴스로 파일 복사
       - name: Copy files via SCP
@@ -43,7 +42,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           target: "~/app/"
-          source: "${{ env.ARTIFACT }}"
+          source: "${{ env.artifact }}"
 
       # EC2 인스턴스에서 JAR 파일 실행
       - name: Execute SSH command
@@ -54,4 +53,4 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             pkill -f 'java -jar' || true
-            nohup java -jar ~/app/$(basename ${{ env.ARTIFACT }}) &
+            nohup java -jar ~/app/$(basename ${{ env.artifact }}) &
