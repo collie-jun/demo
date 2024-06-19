@@ -37,6 +37,7 @@ jobs:
           artifact=$(ls ./build/libs/*.jar)
           echo "artifact=$artifact" >> $GITHUB_ENV
           echo "Artifact path: $artifact"
+          ls -al ./build/libs
 
       # EC2 인스턴스로 파일 복사
       - name: Copy files via SCP
