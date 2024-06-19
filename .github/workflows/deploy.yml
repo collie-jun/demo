@@ -33,7 +33,10 @@ jobs:
       # 배포용 패키지 경로 저장
       - name: Set artifact
         id: set-artifact
-        run: echo "artifact=$(ls ./build/libs/*.jar)" >> $GITHUB_ENV
+        run: |
+          artifact=$(ls ./build/libs/*.jar)
+          echo "artifact=$artifact" >> $GITHUB_ENV
+          echo "Artifact path: $artifact"
 
       # EC2 인스턴스로 파일 복사
       - name: Copy files via SCP
