@@ -13,8 +13,7 @@ public class DemoApplication {
 	}
 
 	@RestController
-    static
-    class HelloWorldController {
+	class HelloWorldController {
 		@GetMapping("/hello-world")
 		public String helloWorld() {
 			return "Hello World";
