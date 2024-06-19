@@ -41,7 +41,7 @@ jobs:
           echo "Artifact path: $artifact"
           ls -al ./build/libs
 
-      # 디버그용으로 환경 변수 출력
+      # 디버깅용으로 환경 변수 출력
       - name: Print environment variables
         run: |
           echo "EC2_HOST=${{ secrets.EC2_HOST }}"
@@ -62,8 +62,6 @@ jobs:
           command_timeout: '10m'
           rm: false
           strip_components: 0
-        env:
-          artifact: "${{ env.artifact }}"
 
       # EC2 인스턴스에서 JAR 파일 실행
       - name: Execute SSH command
@@ -75,5 +73,3 @@ jobs:
           script: |
             pkill -f 'java -jar' || true
             nohup java -jar ~/app/$(basename ${{ env.artifact }}) &
-        env:
-          artifact: "${{ env.artifact }}"
