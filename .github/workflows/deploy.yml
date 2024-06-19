@@ -22,7 +22,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      # 현재시간가져오기
+      # 현재 시간 가져오기
       - name: Get current time
         uses: josStorer/get-current-time@v2.0.2
         id: current-time
@@ -32,6 +32,7 @@ jobs:
 
       # 배포용 패키지 경로 저장
       - name: Set artifact
+        id: set-artifact
         run: echo "artifact=$(ls ./build/libs/*.jar)" >> $GITHUB_ENV
 
       # EC2 인스턴스로 파일 복사
