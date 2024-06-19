@@ -13,10 +13,10 @@ public class DemoApplication {
 	}
 
 	@RestController
-	class HelloWorldController {  // static 키워드를 추가합니다.
+	class HelloworldController {
 		@GetMapping("/hello-world")
-		public String helloWorld() {
-			return "Hello World";
+		public String hellowWorld() {
+			return "Hello world!";
 		}
 	}
 }
