@@ -13,7 +13,7 @@ public class DemoApplication {
 	}
 
 	@RestController
-	static class HelloWorldController {  // static 키워드를 추가합니다.
+	class HelloWorldController {  // static 키워드를 추가합니다.
 		@GetMapping("/hello-world")
 		public String helloWorld() {
 			return "Hello World";
